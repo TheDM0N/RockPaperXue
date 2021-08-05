@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=Nunito:wght@400;900&display=swap" rel="stylesheet">
+<style>
+
+html{
+background: url('seamless_pink_background.jpg');
+}
+img{
+width:auto;
+height:200px;
+}
+
+h1{
+width:50%;
+margin:auto;
+text-align:center;
+font-size:6vh;
+margin-bottom: 2vw;
+font-family: 'Nunito', sans-serif;
+font-weight:900;
+}
+
+.container{
+width:50%;
+margin:auto;
+text-align:center;
+font-family: 'Cute Font', cursive;
+
+}
+
+h2{
+font-size:4vh;
+}
+
+h3{
+font-size:3vh;
+}
+</style>
+
+<head>
+	<title>Rock Paper Xue</title>
+</head>
+
+<body>
+	<h1>Can You Beat Yan?</h1>
+	<div class="container">
+		<h2>Yans Choice: </h2>
+		<span id="computer-choice"></span>
+		<h2>Your Choice: </h2>
+		<span id="user-choice"></span>
+		<h2>Result: <span id="result"></span></h2>
+		<h3>Points: <span id="point-display"><span></h3>
+		<div class="buttons">
+			<button id="Rock">Rock</button>
+			<button id="Paper">Paper</button>
+			<button id="Xue">Xue</button>
+		</div>
+	</div>
+<script>
+
+const computerChoiceDisplay = document.getElementById('computer-choice')
+const userChoiceDisplay = document.getElementById('user-choice')
+const resultDisplay= document.getElementById('result')
+const possibleChoices= document.querySelectorAll('button')
+const pointDisplay= document.getElementById('point-display')
+const victory= new Audio('letsgo.mp3')
+const defeat= new Audio('roblox.mp3')
+const draw= new Audio('bruh.mp3')
+let userChoice
+let computerChoice
+let result
+let count = 0;
+
+possibleChoices.forEach(possibleChoice => possibleChoice.addEventListener('click',(e)=>{
+	userChoice = e.target.id
+	displayUser()
+	generateComputerChoice()
+	getResult()
+	playClip()
+	getPoint()
+	}))
+	
+	function displayUser(){
+	if (userChoice === 'Rock'){
+		userChoiceDisplay.innerHTML  = '<img src="gilrock.png">'
+		}
+	if (userChoice === 'Paper'){
+		userChoiceDisplay.innerHTML  = '<img src="paper.png">'
+		}
+	if (userChoice === 'Xue'){
+		userChoiceDisplay.innerHTML  = '<img src="xue.png">'
+		}
+	}
+	
+	function generateComputerChoice() {
+		const randomNumber = Math.floor(Math.random() * 3)+1
+		
+		if (randomNumber === 1){
+		computerChoice = 'Rock'
+		}
+		if (randomNumber === 2){
+		computerChoice = 'Paper'
+		}
+		if (randomNumber === 3){
+		computerChoice = 'Xue'
+		}
+		 
+		if (computerChoice === 'Rock'){
+		computerChoiceDisplay.innerHTML  = '<img src="gilrock.png">'
+		}
+		if (computerChoice === 'Paper'){
+		computerChoiceDisplay.innerHTML = '<img src="paper.png">'
+		}
+		if (computerChoice === 'Xue'){
+		computerChoiceDisplay.innerHTML  = '<img src="xue.png">'
+		}
+	}
+	
+
+	function getResult(){
+		if (computerChoice === userChoice){
+		result = 'Its a Draw!'
+		}
+		if (computerChoice === 'Rock' && userChoice === "Paper"){
+		result = 'You Win!'
+		}
+		if (computerChoice === 'Rock' && userChoice === "Xue"){
+		result = 'You lost LOSER HAHAHA!'
+		}
+		if (computerChoice === 'Paper' && userChoice === "Xue"){
+		result = 'Oh ma gawd you won!'
+		}
+		if (computerChoice === 'Paper' && userChoice === "Rock"){
+		result = 'Teehee you lost'
+		}
+		if (computerChoice === 'Xue' && userChoice === "Rock"){
+		result = 'Wtf you won uwu'
+		}
+		if (computerChoice === 'Xue' && userChoice === "Paper"){
+		result = 'Omg you lost uwu'
+		}
+		resultDisplay.innerHTML = result
+	}
+	
+	function playClip(){
+		if (result==='You Win!'){
+		victory.play();
+		count++;
+		}
+		if (result==='Wtf you won uwu'){
+		victory.play();
+		count++;
+		}
+		if (result==='Oh ma gawd you won!'){
+		victory.play();
+		count++;
+		}
+		if (result==='You lost LOSER HAHAHA!'){
+		defeat.play();
+		count--;
+		}
+		if (result==='Omg you lost uwu'){
+		defeat.play();
+		count--;
+		}
+		if (result==='Teehee you lost'){
+		defeat.play();
+		count--;
+		}
+		if (result==='Its a Draw!'){
+		draw.play();
+		}
+	}
+	
+	function getPoint(){
+	pointDisplay.innerHTML = count;
+	}
+</script>
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
